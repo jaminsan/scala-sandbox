@@ -72,6 +72,8 @@ lazy val commonSettings = Seq(
     // format: on
   ),
   libraryDependencies ++= Seq(
+    "com.beachape" %% "enumeratum" % EnumeratumVersion,
+
     "org.specs2" %% "specs2-core" % Specs2Version % Test,
     "org.scalacheck" %% "scalacheck" % ScalaCheckVersion % Test,
     "org.scalatest" %% "scalatest" % ScalaTestVersion % Test
