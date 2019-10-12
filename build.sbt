@@ -14,6 +14,7 @@ val FlywayVersion = "5.2.4"
 val PureConfigVersion = "0.10.1"
 val TsecVersion = "0.0.1-RC1"
 val Specs2Version = "4.1.0"
+val akkaVersion = "2.6.0-M8"
 
 // Filter out compiler flags to make the repl experience functional...
 val badConsoleFlags = Seq("-Xfatal-warnings", "-Ywarn-unused:imports")
@@ -113,6 +114,13 @@ lazy val trial = (project in file("trial"))
     organization := "com.example",
     name := "trial",
     version := "0.0.1-SNAPSHOT",
-    scalaVersion := "2.12.8"
-  )
+    scalaVersion := "2.12.8",
+    libraryDependencies ++= Seq(
+      "org.json4s" %% "json4s-xml" % "3.6.7",
+      "com.softwaremill.sttp" %% "core" % "1.7.1",
+      "com.typesafe.akka" %% "akka-http" % "10.1.10",
+      "com.typesafe.akka" %% "akka-actor" % akkaVersion,
+      "com.typesafe.akka" %% "akka-stream" % akkaVersion
 
+    )
+  )
