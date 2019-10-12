@@ -37,12 +37,10 @@ class OslibSpec extends FlatSpec with BeforeAndAfterEach {
   override protected def afterEach(): Unit =
     os.remove(filePath)
 
-  def toIS(content: String): InputStream =
-    new ByteArrayInputStream(content.getBytes)
-
-  val fileName   = "test.txt"
-  val text       = "test"
   val textSource = toIS(text)
   val wd         = os.pwd
   val filePath   = wd / fileName
+
+  def toIS(content: String): InputStream =
+    new ByteArrayInputStream(content.getBytes)
 }
