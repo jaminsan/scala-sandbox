@@ -120,7 +120,8 @@ lazy val trial = (project in file("trial"))
       "com.softwaremill.sttp" %% "core" % "1.7.1",
       "com.typesafe.akka" %% "akka-http" % "10.1.10",
       "com.typesafe.akka" %% "akka-actor" % akkaVersion,
-      "com.typesafe.akka" %% "akka-stream" % akkaVersion
+      "com.typesafe.akka" %% "akka-stream" % akkaVersion,
+      "com.lihaoyi" %% "os-lib" % "0.3.0"
 
     )
   )
