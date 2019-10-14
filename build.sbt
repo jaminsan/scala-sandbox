@@ -20,7 +20,7 @@ val akkaVersion = "2.6.0-M8"
 val badConsoleFlags = Seq("-Xfatal-warnings", "-Ywarn-unused:imports")
 scalacOptions in(Compile, console) ~= (_.filterNot(badConsoleFlags.contains(_)))
 
-enablePlugins(ScalafmtPlugin, JavaAppPackaging, GhpagesPlugin, MicrositesPlugin, TutPlugin)
+enablePlugins(ScalafmtPlugin, JavaAppPackaging, GhpagesPlugin, MicrositesPlugin, TutPlugin, GraalVMNativeImagePlugin)
 
 lazy val commonSettings = Seq(
   scalacOptions ++= Seq(
@@ -78,7 +78,8 @@ lazy val commonSettings = Seq(
     "org.specs2" %% "specs2-core" % Specs2Version % Test,
     "org.scalacheck" %% "scalacheck" % ScalaCheckVersion % Test,
     "org.scalatest" %% "scalatest" % ScalaTestVersion % Test
-  )
+  ),
+  test in assembly := {}
 )
 
 lazy val scalaExercises = (project in file("scala-exercises"))
@@ -126,4 +127,25 @@ lazy val trial = (project in file("trial"))
       "com.github.pathikrit" %% "better-files" % "3.8.0",
       "org.wvlet.airframe" %% "airframe-log" % "19.10.1"
     )
+  )
+
+lazy val nativeCompile = taskKey[Unit]("Build native image")
+lazy val commandLineTool = (project in file("command-line-tool"))
+  .settings(commonSettings: _*)
+  .settings(
+    organization := "com.example",
+    name := "command-line-tool",
+    version := "0.0.1-SNAPSHOT",
+    scalaVersion := "2.12.8",
+    libraryDependencies ++= Seq(
+      "com.github.scopt" %% "scopt" % "4.0.0-RC2"
+    ),
+    mainClass in assembly := Some("com.example.Main"),
+    assemblyJarName in assembly := "app.jar",
+    nativeCompile := {
+      clean.value
+      assembly.value
+      val jarName = (assemblyJarName in assembly).value
+      s"native-image -jar $jarName"
+    }
   )
