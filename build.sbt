@@ -1,3 +1,6 @@
+import scala.language.postfixOps
+import scala.sys.process._
+
 resolvers += Resolver.sonatypeRepo("snapshots")
 
 val CatsVersion = "1.5.0"
@@ -141,11 +144,15 @@ lazy val commandLineTool = (project in file("command-line-tool"))
       "com.github.scopt" %% "scopt" % "4.0.0-RC2"
     ),
     mainClass in assembly := Some("com.example.Main"),
-    assemblyJarName in assembly := "app.jar",
+    assemblyJarName in assembly := {
+      val projectName = name.value
+      s"$projectName-app.jar"
+    },
     nativeCompile := {
       clean.value
       assembly.value
-      val jarName = (assemblyJarName in assembly).value
-      s"native-image -jar $jarName"
+      val path = baseDirectory.value
+      val jarName = (assembly / assemblyJarName).value
+      s"native-image --no-server -jar $path/target/scala-2.12/$jarName" !
     }
   )
