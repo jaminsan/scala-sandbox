@@ -128,7 +128,10 @@ lazy val trial = (project in file("trial"))
       "org.scalaj" %% "scalaj-http" % "2.4.2",
       "com.lihaoyi" %% "os-lib" % "0.3.0",
       "com.github.pathikrit" %% "better-files" % "3.8.0",
-      "org.wvlet.airframe" %% "airframe-log" % "19.10.1"
+      "org.wvlet.airframe" %% "airframe-log" % "19.10.1",
+      "com.h2database" % "h2" % "1.4.200" % Test,
+      "org.scalikejdbc" %% "scalikejdbc" % "3.4.0",
+      "org.scalikejdbc" %% "scalikejdbc-test" % "3.4.0" % Test
     )
   )
 
