@@ -2,9 +2,9 @@ package com.example.datastructures
 
 import com.example.datastructures.{List => MyList, Nil => MyNil}
 import org.scalatest.concurrent.TimeLimits
-import org.scalatest.{DiagrammedAssertions, FlatSpec}
+import org.scalatest.flatspec.AnyFlatSpec
 
-class ListTest extends FlatSpec with DiagrammedAssertions with TimeLimits {
+class ListTest extends AnyFlatSpec with TimeLimits {
 
   "drop関数" should "指定した数だけ要素を削除した新しいリストを返す" in {
     val l = MyList(1, 2, 3, 4, 5)

@@ -2,11 +2,11 @@ package com.example.json4s
 
 import org.json4s.Xml.toJson
 import org.json4s._
-import org.scalatest.FlatSpec
+import org.scalatest.flatspec.AnyFlatSpec
 
 import scala.xml.Elem
 
-class XmlSpec extends FlatSpec {
+class XmlSpec extends AnyFlatSpec {
 
   "toJson" should "convert xml to json" in {
     implicit lazy val formats: DefaultFormats.type = DefaultFormats

@@ -1,10 +1,10 @@
 package com.example.h2
 
-import org.scalatest.{MustMatchers, fixture}
-import scalikejdbc.scalatest.AutoRollback
+import org.scalatest.matchers.must.Matchers
+import org.scalatest.wordspec.FixtureAnyWordSpec
 import scalikejdbc.{ConnectionPool, DBSession, _}
 
-class ScalikeSpec extends fixture.WordSpec with AutoRollback with MustMatchers {
+class ScalikeSpec extends FixtureAnyWordSpec with AutoRollback with Matchers {
 
   Class.forName("org.h2.Driver")
   ConnectionPool.singleton("jdbc:h2:mem:yetanother;INIT=RUNSCRIPT FROM 'classpath:ddl.sql'", "sa", "sa")
@@ -21,7 +21,9 @@ class ScalikeSpec extends fixture.WordSpec with AutoRollback with MustMatchers {
               id   = rs.long("id"),
               name = rs.string("name"),
               age  = rs.int("age")
-          )).list().apply()
+          ))
+        .list()
+        .apply()
 
       users.head.id mustBe 1
       users.head.name mustBe "hiraku"

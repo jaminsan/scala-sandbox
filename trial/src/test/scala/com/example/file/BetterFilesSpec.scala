@@ -1,9 +1,10 @@
 package com.example.file
 
 import better.files.Dsl._
-import org.scalatest.{BeforeAndAfterEach, FlatSpec} // must import Dsl._ to bring in these utils
+import org.scalatest.BeforeAndAfterEach
+import org.scalatest.flatspec.AnyFlatSpec
 
-class BetterFilesSpec extends FlatSpec with BeforeAndAfterEach {
+class BetterFilesSpec extends AnyFlatSpec with BeforeAndAfterEach {
 
   "contentAsString" should "get file content as string" in {
 

@@ -1,9 +1,9 @@
 package com.example.httpclient
 
-import org.scalatest.FlatSpec
+import org.scalatest.flatspec.AnyFlatSpec
 import scalaj.http.Http
 
-class JHttpSpec extends FlatSpec {
+class JHttpSpec extends AnyFlatSpec {
 
   "Http" should "receive response xml" in {
 

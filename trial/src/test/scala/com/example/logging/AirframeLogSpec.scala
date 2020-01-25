@@ -1,8 +1,8 @@
 package com.example.logging
-import org.scalatest.FlatSpec
+import org.scalatest.flatspec.AnyFlatSpec
 import wvlet.log.{LazyLogger, LogLevel, LogRotationHandler, LogSupport, Logger}
 
-class AirframeLogSpec extends FlatSpec {
+class AirframeLogSpec extends AnyFlatSpec {
 
   Logger.setDefaultLogLevel(LogLevel.TRACE)
 

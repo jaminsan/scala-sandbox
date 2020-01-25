@@ -1,10 +1,10 @@
 package com.example.errorhandling
 
-import org.scalatest.FlatSpec
+import org.scalatest.flatspec.AnyFlatSpec
 
 import scala.util.Try
 
-class TrySpec extends FlatSpec {
+class TrySpec extends AnyFlatSpec {
 
   "Try" should "convert exception to Failure object" in {
 

@@ -12,15 +12,14 @@ val H2Version = "1.4.197"
 val Http4sVersion = "0.20.0-M4"
 val LogbackVersion = "1.2.3"
 val ScalaCheckVersion = "1.14.0"
-val ScalaTestVersion = "3.0.5"
+val ScalaTestVersion = "3.2.0-M1"
 val FlywayVersion = "5.2.4"
 val PureConfigVersion = "0.10.1"
-val TsecVersion = "0.0.1-RC1"
-val Specs2Version = "4.1.0"
+val Specs2Version = "4.8.1"
 val akkaVersion = "2.6.0-M8"
 
 // Filter out compiler flags to make the repl experience functional...
-val badConsoleFlags = Seq("-Xfatal-warnings", "-Ywarn-unused:imports")
+val badConsoleFlags = Seq(/**"-Xfatal-warnings", */"-Ywarn-unused:imports")
 scalacOptions in(Compile, console) ~= (_.filterNot(badConsoleFlags.contains(_)))
 
 enablePlugins(ScalafmtPlugin, JavaAppPackaging, GhpagesPlugin, MicrositesPlugin, TutPlugin, GraalVMNativeImagePlugin)
@@ -38,10 +37,10 @@ lazy val commonSettings = Seq(
     "-language:implicitConversions", // Allow definition of implicit functions called views
     "-unchecked", // Enable additional warnings where generated code depends on assumptions.
     "-Xcheckinit", // Wrap field accessors to throw an exception on uninitialized access.
-    "-Xfatal-warnings", // Fail the compilation if there are any warnings.
+    //    "-Xfatal-warnings", // Fail the compilation if there are any warnings.
     "-Xfuture", // Turn on future language features.
     "-Xlint:adapted-args", // Warn if an argument list is modified to match the receiver.
-    "-Xlint:by-name-right-associative", // By-name parameter of right associative operator.
+    //    "-Xlint:by-name-right-associative", // By-name parameter of right associative operator.
     "-Xlint:constant", // Evaluation of a constant arithmetic expression results in an error.
     "-Xlint:delayedinit-select", // Selecting member of DelayedInit.
     "-Xlint:doc-detached", // A Scaladoc comment appears to be detached from its element.
@@ -56,20 +55,20 @@ lazy val commonSettings = Seq(
     "-Xlint:private-shadow", // A private field (or class parameter) shadows a superclass field.
     "-Xlint:stars-align", // Pattern sequence wildcard must align with sequence component.
     "-Xlint:type-parameter-shadow", // A local type parameter shadows a type already in scope.
-    "-Xlint:unsound-match", // Pattern match may not be typesafe.
-    "-Yno-adapted-args", // Do not adapt an argument list (either by inserting () or creating a tuple) to match the receiver.
-    "-Ypartial-unification", // Enable partial unification in type constructor inference
+    //    "-Xlint:unsound-match", // Pattern match may not be typesafe.
+    //    "-Yno-adapted-args", // Do not adapt an argument list (either by inserting () or creating a tuple) to match the receiver.
+    //    "-Ypartial-unification", // Enable partial unification in type constructor inference
     "-Ywarn-dead-code", // Warn when dead code is identified.
     "-Ywarn-extra-implicit", // Warn when more than one implicit parameter section is defined.
-    "-Ywarn-inaccessible", // Warn about inaccessible types in method signatures.
-    "-Ywarn-infer-any", // Warn when a type argument is inferred to be `Any`.
-    "-Ywarn-nullary-unit", // Warn when nullary methods return Unit.
-    "-Ywarn-nullary-override", // Warn when non-nullary `def f()' overrides nullary `def f'.
+    //    "-Ywarn-inaccessible", // Warn about inaccessible types in method signatures.
+    //    "-Ywarn-infer-any", // Warn when a type argument is inferred to be `Any`.
+    //    "-Ywarn-nullary-unit", // Warn when nullary methods return Unit.
+    //    "-Ywarn-nullary-override", // Warn when non-nullary `def f()' overrides nullary `def f'.
     "-Ywarn-numeric-widen", // Warn when numerics are widened.
     "-Ywarn-unused:implicits", // Warn if an implicit parameter is unused.
     "-Ywarn-unused:imports", // Warn if an import selector is not referenced.
     "-Ywarn-unused:locals", // Warn if a local definition is unused.
-    // "-Ywarn-unused:params",           // Warn if a value parameter is unused.
+    "-Ywarn-unused:params",           // Warn if a value parameter is unused.
     "-Ywarn-unused:patvars", // Warn if a variable bound in a pattern is unused.
     "-Ywarn-unused:privates", // Warn if a private member is unused.
     "-Ywarn-value-discard" // Warn when non-Unit expression results are unused.
@@ -142,9 +141,14 @@ lazy val commandLineTool = (project in file("command-line-tool"))
     organization := "com.example",
     name := "command-line-tool",
     version := "0.0.1-SNAPSHOT",
-    scalaVersion := "2.12.8",
+    scalaVersion := "2.13.1",
     libraryDependencies ++= Seq(
-      "com.github.scopt" %% "scopt" % "4.0.0-RC2"
+      "com.github.scopt" %% "scopt" % "4.0.0-RC2",
+      "org.json4s" %% "json4s-xml" % "3.6.7",
+      "com.softwaremill.sttp" %% "core" % "1.7.1",
+      "com.lihaoyi" %% "os-lib" % "0.3.0",
+      "org.wvlet.airframe" %% "airframe-log" % "19.10.1",
+      "org.typelevel" %% "cats-effect" % "2.0.0"
     ),
     mainClass in assembly := Some("com.example.Main"),
     assemblyJarName in assembly := {
@@ -156,6 +160,6 @@ lazy val commandLineTool = (project in file("command-line-tool"))
       assembly.value
       val path = baseDirectory.value
       val jarName = (assembly / assemblyJarName).value
-      s"native-image --no-server -jar $path/target/scala-2.12/$jarName" !
+      s"native-image --no-server -jar $path/target/scala-2.13/$jarName" !
     }
   )

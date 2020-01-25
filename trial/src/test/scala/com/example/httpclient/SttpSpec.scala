@@ -1,9 +1,9 @@
 package com.example.httpclient
 
 import com.softwaremill.sttp.quick._
-import org.scalatest.FlatSpec
+import org.scalatest.flatspec.AnyFlatSpec
 
-class SttpSpec extends FlatSpec {
+class SttpSpec extends AnyFlatSpec {
 
   "get" should "receive response xml" in {
 

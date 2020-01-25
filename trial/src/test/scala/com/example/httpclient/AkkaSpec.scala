@@ -5,13 +5,13 @@ import akka.http.scaladsl.Http
 import akka.http.scaladsl.model.HttpRequest
 import akka.http.scaladsl.unmarshalling.Unmarshal
 import akka.stream.SystemMaterializer
-import org.scalatest.FlatSpec
+import org.scalatest.flatspec.AnyFlatSpec
 
 import scala.concurrent.duration._
 import scala.concurrent.{Await, ExecutionContextExecutor}
 import scala.language.postfixOps
 
-class AkkaSpec extends FlatSpec {
+class AkkaSpec extends AnyFlatSpec {
 
   implicit val system:           ActorSystem              = ActorSystem()
   implicit val materializer:     SystemMaterializer       = SystemMaterializer(system)

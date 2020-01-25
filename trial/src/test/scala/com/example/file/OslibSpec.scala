@@ -3,9 +3,10 @@ package com.example.file
 import java.io.{ByteArrayInputStream, InputStream}
 import java.nio.file.FileAlreadyExistsException
 
-import org.scalatest.{BeforeAndAfterEach, FlatSpec}
+import org.scalatest.BeforeAndAfterEach
+import org.scalatest.flatspec.AnyFlatSpec
 
-class OslibSpec extends FlatSpec with BeforeAndAfterEach {
+class OslibSpec extends AnyFlatSpec with BeforeAndAfterEach {
 
   "read" should "get file content as string" in {
 

@@ -1,8 +1,8 @@
 package com.example.datastructures
 
-import org.scalatest.{DiagrammedAssertions, FlatSpec}
+import org.scalatest.flatspec.AnyFlatSpec
 
-class TreeTest extends FlatSpec with DiagrammedAssertions {
+class TreeTest extends AnyFlatSpec {
 
   "maximum関数" should "Treeの中で最大の値を返す" in {
     assert(

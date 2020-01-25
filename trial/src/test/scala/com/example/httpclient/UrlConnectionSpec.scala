@@ -2,12 +2,12 @@ package com.example.httpclient
 
 import java.net.{HttpURLConnection, URL}
 
-import org.scalatest.FlatSpec
+import org.scalatest.flatspec.AnyFlatSpec
 
 import scala.io.Source
 import scala.util.Try
 
-class UrlConnectionSpec extends FlatSpec {
+class UrlConnectionSpec extends AnyFlatSpec {
 
   "openConnection" should "receive xml response" in {
 
