@@ -1,4 +1,4 @@
-package com.example.h2
+package com.example.dbclient
 
 import org.scalatest.{FixtureTestSuite, Outcome}
 import scalikejdbc.{ConnectionPool, DB, DBSession, LoanPattern, SettingsProvider}

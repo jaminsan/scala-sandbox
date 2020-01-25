@@ -1,4 +1,4 @@
-package com.example.h2
+package com.example.dbclient
 
 import org.scalatest.matchers.must.Matchers
 import org.scalatest.wordspec.FixtureAnyWordSpec
