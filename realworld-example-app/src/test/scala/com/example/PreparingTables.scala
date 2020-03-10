@@ -7,9 +7,20 @@ trait PreparingTables {
 
   DBs.setupAll()
 
+  GlobalSettings.loggingSQLAndTime = LoggingSQLAndTimeSettings(
+    enabled        = true,
+    singleLineMode = true,
+    //    printUnprocessedStackTrace = false,
+    //    stackTraceDepth            = 15,
+    logLevel               = Symbol("debug"),
+    warningEnabled         = false,
+    warningThresholdMillis = 100000L,
+    warningLogLevel        = Symbol("warn")
+  )
+
   try {
     DB autoCommit { implicit s =>
-      SQL("""create table article (
+      SQL("""create table if not exists article (
           |article_id varchar(30),
           |slug varchar(30),
           |title varchar(30),
@@ -25,7 +36,7 @@ trait PreparingTables {
 
   try {
     DB autoCommit { implicit s =>
-      SQL("""create table tag (
+      SQL("""create table if not exists tag (
           |tag_id varchar(30),
           |name varchar(30),
           |primary key (tag_id)
@@ -35,11 +46,44 @@ trait PreparingTables {
 
   try {
     DB autoCommit { implicit s =>
-      SQL("""create table article_tag_association (
+      SQL("""create table if not exists article_tag_association (
           |article_tag_association_id varchar(30),
           |article_id varchar(30),
           |tag_id varchar(30),
           |primary key (article_tag_association_id)
+          |)""".stripMargin).execute().apply()
+    }
+  } catch { case _: Exception => }
+
+  try {
+    DB autoCommit { implicit s =>
+      SQL("""create table if not exists large (
+          |large_id varchar(30),
+          |column1 varchar(30),
+          |column2 varchar(30),
+          |column3 varchar(30),
+          |column4 varchar(30),
+          |column5 varchar(30),
+          |column6 varchar(30),
+          |column7 varchar(30),
+          |column8 varchar(30),
+          |column9 varchar(30),
+          |column10 varchar(30),
+          |column11 varchar(30),
+          |column12 varchar(30),
+          |column13 varchar(30),
+          |column14 varchar(30),
+          |column15 varchar(30),
+          |column16 varchar(30),
+          |column17 varchar(30),
+          |column18 varchar(30),
+          |column19 varchar(30),
+          |column20 varchar(30),
+          |column21 varchar(30),
+          |column22 varchar(30),
+          |column23 varchar(30),
+          |column24 varchar(30),
+          |primary key (large_id)
           |)""".stripMargin).execute().apply()
     }
   } catch { case _: Exception => }

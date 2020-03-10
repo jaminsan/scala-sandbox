@@ -165,10 +165,10 @@ lazy val realworldExampleApp = (project in file("realworld-example-app"))
       "com.github.slugify" % "slugify" % "2.4",
       "com.typesafe.akka" %% "akka-actor" % "2.6.3",
       "org.scalikejdbc" %% "scalikejdbc" % "3.4.0",
-      "org.scalikejdbc"       %% "scalikejdbc-async" % "0.13.+",
+      "org.scalikejdbc" %% "scalikejdbc-async" % "0.13.+",
       "org.scalikejdbc" %% "scalikejdbc-config" % "3.4.0",
-      "com.github.jasync-sql" %  "jasync-mysql"      % "1.0.+",
-      "org.slf4j"             %  "slf4j-simple"      % "1.7.+",
+      "com.github.jasync-sql" % "jasync-mysql" % "1.0.+",
+      "ch.qos.logback" % "logback-classic" % "1.2.3",
       "com.h2database" % "h2" % "1.4.200" % Test,
       "org.scalikejdbc" %% "scalikejdbc-test" % "3.4.0" % Test
     )
