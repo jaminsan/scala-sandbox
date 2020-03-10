@@ -1,4 +1,4 @@
-package com.example.dbclient
+package com.example.dbclient.scalike
 
 import org.scalatest.matchers.must.Matchers
 import org.scalatest.wordspec.FixtureAnyWordSpec
@@ -29,7 +29,26 @@ class ScalikeSpec extends FixtureAnyWordSpec with AutoRollback with Matchers {
       users.head.name mustBe "hiraku"
       users.head.age mustBe 26
     }
+
+    "hoge" in { implicit session: DBSession =>
+      import UserDao._
+      withSQL {
+        select
+          .from(UserDao as u)
+          .where
+          .eq(u.name, "mishima")
+      }.map(rs => rs.get(1)).single().apply()
+    }
   }
 
   case class User(id: Long, name: String, age: Int)
+
+  object UserDao extends SQLSyntaxSupport[User] {
+
+    override val tableName = "user"
+
+    val u = syntax("u")
+
+    override def columnNames: Seq[String] = Seq("name", "age")
+  }
 }

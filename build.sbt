@@ -79,7 +79,8 @@ lazy val commonSettings = Seq(
 
     "org.specs2" %% "specs2-core" % Specs2Version % Test,
     "org.scalacheck" %% "scalacheck" % ScalaCheckVersion % Test,
-    "org.scalatest" %% "scalatest" % ScalaTestVersion % Test
+    "org.scalatest" %% "scalatest" % ScalaTestVersion % Test,
+    "org.scalamock" %% "scalamock" % "4.4.0" % Test
   ),
   test in assembly := {}
 )
@@ -130,6 +131,45 @@ lazy val trial = (project in file("trial"))
       "org.wvlet.airframe" %% "airframe-log" % "19.10.1",
       "com.h2database" % "h2" % "1.4.200" % Test,
       "org.scalikejdbc" %% "scalikejdbc" % "3.4.0",
+      "org.scalikejdbc" %% "scalikejdbc-test" % "3.4.0" % Test
+    )
+  )
+
+lazy val serverCask = (project in file("server-cask"))
+  .settings(commonSettings: _*)
+  .settings(
+    organization := "com.example",
+    name := "server-cask",
+    version := "0.0.1-SNAPSHOT",
+    scalaVersion := "2.13.1",
+    libraryDependencies ++= Seq(
+      "com.lihaoyi" %% "cask" % "0.5.6",
+      "com.lihaoyi" %% "scalatags" % "0.7.0"
+    )
+  )
+
+lazy val realworldExampleApp = (project in file("realworld-example-app"))
+  .settings(commonSettings: _*)
+  .settings(
+    organization := "com.example",
+    name := "realworld-example-app",
+    version := "0.0.1-SNAPSHOT",
+    scalaVersion := "2.13.1",
+    libraryDependencies ++= Seq(
+      "com.lihaoyi" %% "cask" % "0.5.6",
+      "com.lihaoyi" %% "scalatags" % "0.7.0",
+      "org.wvlet.airframe" %% "airframe-log" % "19.10.1",
+      "io.scalaland" %% "chimney" % "0.4.1",
+      "de.huxhorn.sulky" % "de.huxhorn.sulky.ulid" % "8.2.0",
+      "org.typelevel" %% "cats-core" % "2.0.0",
+      "com.github.slugify" % "slugify" % "2.4",
+      "com.typesafe.akka" %% "akka-actor" % "2.6.3",
+      "org.scalikejdbc" %% "scalikejdbc" % "3.4.0",
+      "org.scalikejdbc"       %% "scalikejdbc-async" % "0.13.+",
+      "org.scalikejdbc" %% "scalikejdbc-config" % "3.4.0",
+      "com.github.jasync-sql" %  "jasync-mysql"      % "1.0.+",
+      "org.slf4j"             %  "slf4j-simple"      % "1.7.+",
+      "com.h2database" % "h2" % "1.4.200" % Test,
       "org.scalikejdbc" %% "scalikejdbc-test" % "3.4.0" % Test
     )
   )
