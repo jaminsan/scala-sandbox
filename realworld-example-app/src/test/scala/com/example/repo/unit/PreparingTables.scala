@@ -1,22 +1,11 @@
-package com.example
+package com.example.repo.unit
 
-import scalikejdbc._
 import scalikejdbc.config.DBs
+import scalikejdbc.{DB, SQL}
 
-trait PreparingTables {
+trait PreparingTables extends ScalikeLogging {
 
-  DBs.setupAll()
-
-  GlobalSettings.loggingSQLAndTime = LoggingSQLAndTimeSettings(
-    enabled        = true,
-    singleLineMode = true,
-    //    printUnprocessedStackTrace = false,
-    //    stackTraceDepth            = 15,
-    logLevel               = Symbol("debug"),
-    warningEnabled         = false,
-    warningThresholdMillis = 100000L,
-    warningLogLevel        = Symbol("warn")
-  )
+  DBs.setup(Symbol("default"))
 
   try {
     DB autoCommit { implicit s =>

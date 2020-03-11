@@ -1,7 +1,5 @@
 package com
 
-import scalikejdbc.{GlobalSettings, LoggingSQLAndTimeSettings}
-
 import scala.concurrent.duration.{Duration, SECONDS}
 import scala.concurrent.{Await, ExecutionContext, Future}
 

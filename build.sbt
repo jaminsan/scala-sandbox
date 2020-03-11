@@ -17,6 +17,7 @@ val FlywayVersion = "5.2.4"
 val PureConfigVersion = "0.10.1"
 val Specs2Version = "4.8.1"
 val akkaVersion = "2.6.0-M8"
+val testcontainersScalaVersion = "0.36.0"
 
 // Filter out compiler flags to make the repl experience functional...
 val badConsoleFlags = Seq(/**"-Xfatal-warnings", */"-Ywarn-unused:imports")
@@ -168,9 +169,12 @@ lazy val realworldExampleApp = (project in file("realworld-example-app"))
       "org.scalikejdbc" %% "scalikejdbc-async" % "0.13.+",
       "org.scalikejdbc" %% "scalikejdbc-config" % "3.4.0",
       "com.github.jasync-sql" % "jasync-mysql" % "1.0.+",
+      "mysql" % "mysql-connector-java" % "8.0.18",
       "ch.qos.logback" % "logback-classic" % "1.2.3",
       "com.h2database" % "h2" % "1.4.200" % Test,
-      "org.scalikejdbc" %% "scalikejdbc-test" % "3.4.0" % Test
+      "org.scalikejdbc" %% "scalikejdbc-test" % "3.4.0" % Test,
+      "com.dimafeng" %% "testcontainers-scala-scalatest" % testcontainersScalaVersion % Test,
+      "com.dimafeng" %% "testcontainers-scala-mysql" % testcontainersScalaVersion % Test
     )
   )
 

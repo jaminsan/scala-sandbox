@@ -1,4 +1,4 @@
-package com.example
+package com.example.repo.unit
 
 import org.scalatest.{FixtureTestSuite, Outcome}
 import scalikejdbc.{ConnectionPool, DB, DBSession, LoanPattern, SettingsProvider}

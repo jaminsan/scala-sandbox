@@ -4,7 +4,8 @@ import java.time.OffsetDateTime
 
 import com.example.db.article._
 import com.example.model.{Article, IdGenerator, ModelId}
-import com.example.{AutoRollback, FutureOps, PreparingTables}
+import com.example.repo.unit.{AutoRollback, PreparingTables}
+import com.example.FutureOps
 import org.scalamock.scalatest.MockFactory
 import org.scalatest.matchers.must.Matchers
 

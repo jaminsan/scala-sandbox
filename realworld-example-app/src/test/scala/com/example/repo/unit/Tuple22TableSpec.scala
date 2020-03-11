@@ -1,4 +1,4 @@
-package com.example
+package com.example.repo.unit
 
 import org.scalatest.Inspectors.forAll
 import org.scalatest.flatspec.FixtureAnyFlatSpec
