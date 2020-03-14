@@ -18,6 +18,7 @@ val PureConfigVersion = "0.10.1"
 val Specs2Version = "4.8.1"
 val akkaVersion = "2.6.0-M8"
 val testcontainersScalaVersion = "0.36.0"
+val scalikeJdbcVersion = "3.4.0"
 
 // Filter out compiler flags to make the repl experience functional...
 val badConsoleFlags = Seq(/**"-Xfatal-warnings", */"-Ywarn-unused:imports")
@@ -165,9 +166,10 @@ lazy val realworldExampleApp = (project in file("realworld-example-app"))
       "org.typelevel" %% "cats-core" % "2.0.0",
       "com.github.slugify" % "slugify" % "2.4",
       "com.typesafe.akka" %% "akka-actor" % "2.6.3",
-      "org.scalikejdbc" %% "scalikejdbc" % "3.4.0",
+      "org.scalikejdbc" %% "scalikejdbc" % scalikeJdbcVersion,
       "org.scalikejdbc" %% "scalikejdbc-async" % "0.13.+",
-      "org.scalikejdbc" %% "scalikejdbc-config" % "3.4.0",
+      "org.scalikejdbc" %% "scalikejdbc-config" % scalikeJdbcVersion,
+      "org.scalikejdbc" %% "scalikejdbc-streams" % scalikeJdbcVersion,
       "com.github.jasync-sql" % "jasync-mysql" % "1.0.+",
       "mysql" % "mysql-connector-java" % "8.0.18",
       "ch.qos.logback" % "logback-classic" % "1.2.3",

@@ -1,7 +1,6 @@
 package com.example.repo.unit
 
 import com.dimafeng.testcontainers.{Container, ForAllTestContainer, MultipleContainers, MySQLContainer}
-import com.example.repo.unit.EmployeeTable._
 import org.scalatest.flatspec.FixtureAnyFlatSpec
 import org.scalatest.matchers.must.Matchers
 import scalikejdbc._
@@ -12,6 +11,9 @@ class MasterSlaveSpec
   with AutoRollback
   with ScalikeLogging
   with Matchers {
+
+  import com.example.repo.unit.MasterSlaveSpec.{EmployeeRecord, EmployeeTable}
+  import EmployeeTable._
 
   val master = new MySQLContainer()
   val slave  = new MySQLContainer()
@@ -61,7 +63,7 @@ class MasterSlaveSpec
     // readOnly false だと master にいく
     val records = selectEmployees()
     records must have length 2
-      records.head.employeeId mustBe "masterEmployeeId1"
+    records.head.employeeId mustBe "masterEmployeeId1"
   }
 
   def createEmployeeTable()(implicit s: DBSession) =
@@ -74,4 +76,26 @@ class MasterSlaveSpec
 
   def selectEmployees()(implicit s: DBSession): List[EmployeeRecord] =
     withSQL(select.from(EmployeeTable as e)).map(EmployeeRecord(e.resultName)).list().apply()
+}
+
+object MasterSlaveSpec {
+
+  case class EmployeeRecord(employeeId: String, name: String)
+
+  object EmployeeRecord {
+
+    def apply(e: ResultName[EmployeeRecord])(ws: WrappedResultSet): EmployeeRecord =
+      EmployeeRecord(employeeId = ws.string(e.employeeId), name = ws.string(e.name))
+  }
+
+  object EmployeeTable extends SQLSyntaxSupport[EmployeeRecord] {
+
+    override def connectionPoolName = Symbol("master-slave")
+
+    override val tableName = "employee"
+
+    override def columnNames = Seq("employee_id", "name")
+
+    val e = syntax("e")
+  }
 }

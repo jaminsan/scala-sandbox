@@ -46,6 +46,16 @@ trait PreparingTables extends ScalikeLogging {
 
   try {
     DB autoCommit { implicit s =>
+      SQL("""create table if not exists employee (
+          |employee_id varchar(30),
+          |name varchar(30),
+          |primary key (employee_id)
+          |)""".stripMargin).execute().apply()
+    }
+  } catch { case _: Exception => }
+
+  try {
+    DB autoCommit { implicit s =>
       SQL("""create table if not exists large (
           |large_id varchar(30),
           |column1 varchar(30),

@@ -7,6 +7,7 @@ import scalikejdbc._
 
 class Tuple22TableSpec extends FixtureAnyFlatSpec with PreparingTables with AutoRollback with Matchers {
 
+  import com.example.repo.unit.Tuple22TableSpec.{LargeRecord, LargeTable}
   import LargeTable._
 
   behavior of "over 22 columns db access"
@@ -78,72 +79,74 @@ class Tuple22TableSpec extends FixtureAnyFlatSpec with PreparingTables with Auto
           column.column24 -> "column24",
         )
     )
-
 }
 
-case class LargeRecord(
-  largeId:  String,
-  column1:  String,
-  column2:  String,
-  column3:  String,
-  column4:  String,
-  column5:  String,
-  column6:  String,
-  column7:  String,
-  column8:  String,
-  column9:  String,
-  column10: String,
-  column11: String,
-  column12: String,
-  column13: String,
-  column14: String,
-  column15: String,
-  column16: String,
-  column17: String,
-  column18: String,
-  column19: String,
-  column20: String,
-  column21: String,
-  column22: String,
-  column23: String,
-  column24: String
-)
+object Tuple22TableSpec {
 
-object LargeRecord {
+  case class LargeRecord(
+    largeId:  String,
+    column1:  String,
+    column2:  String,
+    column3:  String,
+    column4:  String,
+    column5:  String,
+    column6:  String,
+    column7:  String,
+    column8:  String,
+    column9:  String,
+    column10: String,
+    column11: String,
+    column12: String,
+    column13: String,
+    column14: String,
+    column15: String,
+    column16: String,
+    column17: String,
+    column18: String,
+    column19: String,
+    column20: String,
+    column21: String,
+    column22: String,
+    column23: String,
+    column24: String
+  )
 
-  def apply(l: ResultName[LargeRecord])(ws: WrappedResultSet): LargeRecord =
-    LargeRecord(
-      largeId  = ws.string(l.largeId),
-      column1  = ws.string(l.column1),
-      column2  = ws.string(l.column2),
-      column3  = ws.string(l.column3),
-      column4  = ws.string(l.column4),
-      column5  = ws.string(l.column5),
-      column6  = ws.string(l.column6),
-      column7  = ws.string(l.column7),
-      column8  = ws.string(l.column8),
-      column9  = ws.string(l.column9),
-      column10 = ws.string(l.column10),
-      column11 = ws.string(l.column11),
-      column12 = ws.string(l.column12),
-      column13 = ws.string(l.column13),
-      column14 = ws.string(l.column14),
-      column15 = ws.string(l.column15),
-      column16 = ws.string(l.column16),
-      column17 = ws.string(l.column17),
-      column18 = ws.string(l.column18),
-      column19 = ws.string(l.column19),
-      column20 = ws.string(l.column20),
-      column21 = ws.string(l.column21),
-      column22 = ws.string(l.column22),
-      column23 = ws.string(l.column23),
-      column24 = ws.string(l.column24)
-    )
-}
+  object LargeRecord {
 
-object LargeTable extends SQLSyntaxSupport[LargeRecord] {
+    def apply(l: ResultName[LargeRecord])(ws: WrappedResultSet): LargeRecord =
+      LargeRecord(
+        largeId  = ws.string(l.largeId),
+        column1  = ws.string(l.column1),
+        column2  = ws.string(l.column2),
+        column3  = ws.string(l.column3),
+        column4  = ws.string(l.column4),
+        column5  = ws.string(l.column5),
+        column6  = ws.string(l.column6),
+        column7  = ws.string(l.column7),
+        column8  = ws.string(l.column8),
+        column9  = ws.string(l.column9),
+        column10 = ws.string(l.column10),
+        column11 = ws.string(l.column11),
+        column12 = ws.string(l.column12),
+        column13 = ws.string(l.column13),
+        column14 = ws.string(l.column14),
+        column15 = ws.string(l.column15),
+        column16 = ws.string(l.column16),
+        column17 = ws.string(l.column17),
+        column18 = ws.string(l.column18),
+        column19 = ws.string(l.column19),
+        column20 = ws.string(l.column20),
+        column21 = ws.string(l.column21),
+        column22 = ws.string(l.column22),
+        column23 = ws.string(l.column23),
+        column24 = ws.string(l.column24)
+      )
+  }
 
-  override def tableName: String = "large"
+  object LargeTable extends SQLSyntaxSupport[LargeRecord] {
 
-  val l = syntax("l")
+    override def tableName: String = "large"
+
+    val l = syntax("l")
+  }
 }
