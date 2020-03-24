@@ -15,9 +15,7 @@ class StreamingSpec
   import com.example.repo.unit.StreamingSpec.EmployeeTable
   import EmployeeTable._
 
-  val mysql = MySQLContainer()
-  // FIXME: MultipleContainers じゃないとなぜか落ちる......書き方が悪いんだろうか？scala のバージョン？
-  override def container = MultipleContainers(mysql)
+  override val container = MySQLContainer()
 
   val poolName = Symbol("streaming")
 
@@ -25,7 +23,7 @@ class StreamingSpec
     Class.forName("com.mysql.cj.jdbc.Driver")
     ConnectionPool.add(
       poolName,
-      s"${mysql.jdbcUrl}?useCursorFetch=true",
+      s"${container.jdbcUrl}?useCursorFetch=true",
       "test",
       "test"
     )

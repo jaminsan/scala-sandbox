@@ -17,7 +17,7 @@ class MasterSlaveSpec
 
   val master = new MySQLContainer()
   val slave  = new MySQLContainer()
-  override def container: Container = MultipleContainers(master, slave)
+  override val container: Container = MultipleContainers(master, slave)
 
   val poolNameMasterSlave = Symbol("master-slave")
   val poolNameSlave       = Symbol("slave")
